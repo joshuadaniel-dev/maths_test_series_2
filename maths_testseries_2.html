@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MH 12th Maths · Responsive Solutions + Formula Bank</title>
+<style>
+  :root{
+    --vec:#6366f1; --lpp:#f59e0b; --diff:#10b981; --app:#ec4899;
+    --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --bg:#f6f7fb; --card:#ffffff;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{font-size:clamp(13.5px,0.4vw + 12.6px,16px);scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+    padding:clamp(12px,2.5vw,28px) clamp(10px,2vw,18px) clamp(40px,8vw,70px);
+    overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
+  }
+  img,svg{max-width:100%;height:auto;display:block}
+  .wrap{max-width:1180px;margin:0 auto;width:100%}
+
+  /* ═══════ HEADER ═══════ */
+  header{
+    background:linear-gradient(120deg,#1e1b4b 0%,#4338ca 45%,#7c3aed 100%);
+    color:#fff;border-radius:clamp(14px,2vw,22px);
+    padding:clamp(18px,4vw,34px);position:relative;overflow:hidden;
+    box-shadow:0 18px 40px -18px rgba(67,56,202,.7);
+  }
+  header::after{content:"";position:absolute;right:-70px;top:-90px;width:clamp(160px,30vw,280px);height:clamp(160px,30vw,280px);border-radius:50%;background:rgba(255,255,255,.09);pointer-events:none}
+  header::before{content:"";position:absolute;right:8%;bottom:-110px;width:clamp(120px,20vw,180px);height:clamp(120px,20vw,180px);border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none}
+  header h1{font-size:clamp(1.05rem,1vw + 0.9rem,1.85rem);font-weight:800;letter-spacing:-.5px;position:relative;line-height:1.25;padding-right:4px}
+  header p{opacity:.88;margin-top:6px;font-size:clamp(.78rem,.4vw + .68rem,.95rem);position:relative}
+  .pillrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:clamp(10px,2vw,16px);position:relative}
+  .pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:4px clamp(9px,1.5vw,13px);border-radius:999px;font-size:clamp(.66rem,.3vw + .6rem,.76rem);font-weight:600;white-space:nowrap}
+
+  /* ═══════ STATS ═══════ */
+  .stats{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));
+    gap:clamp(8px,1.5vw,14px);margin-top:clamp(14px,3vw,22px);
+  }
+  .stat{background:var(--card);border-radius:clamp(12px,1.8vw,16px);padding:clamp(12px,2.5vw,18px) clamp(14px,2.5vw,20px);border:1px solid var(--line);box-shadow:0 4px 14px -8px rgba(15,23,42,.25);position:relative;overflow:hidden}
+  .stat span.bar{position:absolute;left:0;top:0;bottom:0;width:5px}
+  .stat .num{font-size:clamp(1.3rem,.8vw + 1.1rem,1.9rem);font-weight:800;line-height:1.1}
+  .stat .lbl{font-size:clamp(.62rem,.3vw + .55rem,.75rem);text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700;margin-top:4px}
+
+  /* ═══════ CHART GRID ═══════ */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(12px,2.5vw,18px);margin-top:clamp(14px,3vw,22px)}
+  .card{background:var(--card);border-radius:clamp(14px,2vw,18px);padding:clamp(14px,3vw,22px) clamp(14px,3vw,24px);border:1px solid var(--line);box-shadow:0 4px 16px -10px rgba(15,23,42,.3);min-width:0}
+  .card h3{font-size:clamp(.82rem,.3vw + .75rem,.95rem);font-weight:800;margin-bottom:4px}
+  .card .sub{font-size:clamp(.68rem,.3vw + .6rem,.76rem);color:var(--muted);margin-bottom:clamp(12px,2vw,18px)}
+
+  .donutwrap{display:flex;align-items:center;gap:clamp(14px,3vw,26px);flex-wrap:wrap;justify-content:center}
+  .donutwrap svg{flex:none;width:clamp(130px,30vw,180px);height:auto}
+  .legend{display:flex;flex-direction:column;gap:clamp(6px,1.2vw,11px);font-size:clamp(.7rem,.3vw + .62rem,.83rem);flex:1;min-width:150px}
+  .legend div{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .dot{width:11px;height:11px;border-radius:3px;flex:none}
+  .legend b{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .legend small{color:var(--muted);font-size:.85em;font-weight:600}
+
+  .bars{display:flex;align-items:flex-end;gap:clamp(6px,1.2vw,14px);height:clamp(140px,26vw,190px);padding-top:8px}
+  .bcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:5px;min-width:0}
+  .bstack{width:100%;max-width:62px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;border-radius:9px 9px 0 0;overflow:hidden}
+  .bseg{width:100%}
+  .bcol .y{font-size:clamp(.6rem,.3vw + .52rem,.76rem);font-weight:800;color:var(--muted)}
+  .bcol .v{font-size:clamp(.64rem,.3vw + .56rem,.8rem);font-weight:800}
+  .slegend{display:flex;gap:clamp(8px,1.8vw,14px);flex-wrap:wrap;margin-top:clamp(10px,2vw,16px);font-size:clamp(.64rem,.3vw + .56rem,.75rem);color:var(--muted);font-weight:600}
+  .slegend span{display:flex;align-items:center;gap:5px}
+
+  /* Marks bar */
+  .marksbar{display:flex;height:clamp(32px,7vw,38px);border-radius:10px;overflow:hidden;font-size:clamp(.58rem,.3vw + .5rem,.78rem);font-weight:800;color:#fff}
+  .marksbar > div{display:grid;place-items:center;padding:2px;overflow:hidden;white-space:nowrap;min-width:0}
+  @media(max-width:640px){
+    .marksbar{height:auto;flex-wrap:wrap;border-radius:10px}
+    .marksbar > div{flex:1 1 50%;height:32px;font-size:.68rem}
+  }
+
+  /* ═══════ CHAPTER ═══════ */
+  .chap{margin-top:clamp(22px,4vw,34px)}
+  .chaphead{
+    display:flex;align-items:center;gap:clamp(10px,2vw,14px);
+    padding:clamp(12px,2.5vw,16px) clamp(14px,3vw,20px);
+    border-radius:clamp(12px,2vw,14px);color:#fff;
+    box-shadow:0 10px 24px -14px rgba(0,0,0,.5);flex-wrap:wrap;
+  }
+  .chaphead .ico{width:clamp(34px,8vw,42px);height:clamp(34px,8vw,42px);border-radius:11px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:clamp(.95rem,2vw,1.15rem);flex:none}
+  .chaphead > div:nth-child(2){min-width:0;flex:1}
+  .chaphead h2{font-size:clamp(.85rem,.6vw + .7rem,1.05rem);font-weight:800;line-height:1.3}
+  .chaphead p{font-size:clamp(.65rem,.3vw + .58rem,.75rem);opacity:.88}
+  .chaphead .cnt{margin-left:auto;text-align:right;font-size:clamp(.6rem,.3vw + .54rem,.72rem);opacity:.95;font-weight:700;flex:none}
+  .chaphead .cnt b{display:block;font-size:clamp(1rem,1vw + .8rem,1.35rem);line-height:1}
+
+  .yearblock{margin-top:clamp(10px,2vw,14px)}
+  .yeartag{display:flex;align-items:center;gap:8px;font-size:clamp(.64rem,.3vw + .56rem,.74rem);font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);padding:4px 0;margin-bottom:8px;width:100%}
+  .yeartag::after{content:"";flex:1;height:1px;background:var(--line);min-width:30px}
+
+  /* ═══════ QUESTION ═══════ */
+  details.q{background:var(--card);border:1px solid var(--line);border-radius:clamp(10px,1.6vw,12px);margin-bottom:8px;overflow:hidden;transition:.2s}
+  details.q[open]{box-shadow:0 8px 24px -14px rgba(15,23,42,.4);border-color:#c7d2fe}
+  details.q summary{
+    cursor:pointer;list-style:none;
+    padding:clamp(10px,2vw,13px) clamp(12px,2.5vw,16px);
+    display:flex;align-items:center;gap:clamp(7px,1.5vw,12px);
+    font-size:clamp(.78rem,.3vw + .7rem,.87rem);font-weight:600;
+    flex-wrap:wrap;min-height:44px;
+  }
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary:hover{background:#fafbff}
+  details.q summary::marker{display:none}
+  .qno{font-size:clamp(.62rem,.3vw + .54rem,.7rem);font-weight:800;padding:3px clamp(6px,1.2vw,9px);border-radius:7px;flex:none;background:#eef2ff;color:#4338ca;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .qno + *{min-width:0}
+  .mtag{margin-left:auto;flex:none;font-size:clamp(.6rem,.3vw + .52rem,.68rem);font-weight:800;padding:3px clamp(6px,1.2vw,9px);border-radius:999px;background:#f1f5f9;color:#475569;white-space:nowrap}
+  .chev{flex:none;color:#94a3b8;font-size:.66rem;transition:.25s;order:-1;padding-right:2px}
+  details.q[open] .chev{transform:rotate(90deg)}
+  @media(max-width:520px){
+    .chev{order:10;padding-right:0;padding-left:4px}
+  }
+  .qbody{padding:0 clamp(12px,2.5vw,18px) clamp(14px,2.5vw,18px)}
+
+  .qtext{font-size:clamp(.78rem,.3vw + .7rem,.88rem);color:#334155;line-height:1.75;padding-bottom:12px;margin-bottom:14px;border-bottom:1px dashed #e2e8f0;overflow-wrap:break-word}
+  .qtext b{color:#0f172a}
+  .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .opts span{background:#f8fafc;border:1px solid #e2e8f0;padding:4px clamp(8px,1.5vw,11px);border-radius:8px;font-size:clamp(.68rem,.3vw + .6rem,.79rem);font-family:'Cambria Math',Georgia,serif;color:#334155}
+  .opts span.correct{background:#ecfdf5;border-color:#6ee7b7;color:#065f46;font-weight:700}
+  .note{font-size:clamp(.68rem,.3vw + .6rem,.78rem);color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:7px 11px;margin-top:9px;overflow-wrap:break-word}
+
+  /* ═══════ SOLUTION ═══════ */
+  .sol{background:linear-gradient(180deg,#f8fafc,#f1f5f9);border:1px solid #e2e8f0;border-radius:clamp(10px,1.8vw,14px);padding:clamp(12px,2.5vw,16px) clamp(12px,2.5vw,18px) clamp(10px,2vw,14px)}
+  .sol-head{display:flex;align-items:center;gap:9px;font-size:clamp(.62rem,.3vw + .54rem,.7rem);font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:#047857;margin-bottom:clamp(10px,2vw,14px)}
+  .sol-head::before{content:"";width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 0 4px rgba(16,185,129,.16);flex:none}
+  .step{display:flex;gap:clamp(8px,1.5vw,11px);margin-bottom:clamp(8px,1.5vw,11px);font-size:clamp(.75rem,.3vw + .68rem,.86rem);line-height:1.7}
+  .step:last-of-type{margin-bottom:0}
+  .sn{flex:none;width:clamp(20px,4.5vw,22px);height:clamp(20px,4.5vw,22px);border-radius:7px;background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;font-size:clamp(.6rem,.3vw + .52rem,.7rem);font-weight:800;display:grid;place-items:center;margin-top:2px;box-shadow:0 3px 8px -3px rgba(99,102,241,.6)}
+  .step .txt{flex:1;min-width:0;overflow-wrap:break-word}
+
+  .fx{
+    display:block;font-family:'Cambria Math',Georgia,serif;
+    background:#fff;border:1px solid #e2e8f0;border-left:3px solid #a5b4fc;border-radius:8px;
+    padding:7px clamp(8px,1.5vw,12px);margin:7px 0;
+    font-size:clamp(.76rem,.35vw + .68rem,.9rem);color:#1e293b;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    white-space:nowrap;max-width:100%;
+  }
+  .fx:last-child{margin-bottom:0}
+
+  .ans{margin-top:clamp(10px,2vw,14px);padding:clamp(9px,1.8vw,11px) clamp(11px,2.2vw,15px);border-radius:11px;background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:1px solid #6ee7b7;color:#065f46;font-size:clamp(.76rem,.3vw + .68rem,.87rem);font-weight:700;display:flex;align-items:flex-start;gap:10px;overflow-wrap:break-word}
+  .ans::before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;background:#10b981;color:#fff;font-size:.7rem;display:grid;place-items:center;margin-top:1px;font-weight:900}
+  .ans.proof{background:linear-gradient(135deg,#eef2ff,#e0e7ff);border-color:#a5b4fc;color:#3730a3}
+  .ans.proof::before{background:#6366f1;content:"∴"}
+  .ans .fx{background:rgba(255,255,255,.7);border-color:rgba(16,185,129,.3);margin-top:6px;border-left-color:#10b981}
+
+  /* ═══════ FORMULA BANK ═══════ */
+  .formula-hero{margin-top:clamp(26px,5vw,44px);background:linear-gradient(120deg,#0f172a,#1e293b 60%,#312e81);color:#fff;border-radius:clamp(14px,2.4vw,22px);padding:clamp(20px,4vw,34px) clamp(18px,3.5vw,36px);position:relative;overflow:hidden;box-shadow:0 20px 44px -20px rgba(15,23,42,.8)}
+  .formula-hero::before{content:"";position:absolute;right:-60px;bottom:-80px;width:clamp(160px,28vw,260px);height:clamp(160px,28vw,260px);border-radius:50%;background:rgba(99,102,241,.18);pointer-events:none}
+  .formula-hero::after{content:"∑ ∫ ∂ √ π";position:absolute;right:4%;top:12%;font-size:clamp(1.2rem,4vw,2.4rem);font-family:'Cambria Math',Georgia,serif;color:rgba(255,255,255,.12);letter-spacing:6px;pointer-events:none}
+  .formula-hero h2{font-size:clamp(1rem,1vw + .85rem,1.5rem);font-weight:800;letter-spacing:-.4px;position:relative;line-height:1.25}
+  .formula-hero p{opacity:.78;font-size:clamp(.72rem,.35vw + .64rem,.9rem);margin-top:6px;position:relative}
+
+  .fgroup{background:var(--card);border-radius:clamp(14px,2vw,18px);padding:clamp(14px,3vw,22px) clamp(14px,3vw,24px);border:1px solid var(--line);box-shadow:0 4px 16px -10px rgba(15,23,42,.3);margin-top:clamp(12px,2.5vw,18px)}
+  .fgroup-head{display:flex;align-items:center;gap:clamp(9px,1.8vw,12px);margin-bottom:clamp(12px,2.5vw,18px);padding-bottom:clamp(10px,2vw,14px);border-bottom:2px solid #f1f5f9;flex-wrap:wrap}
+  .fgroup-head .ficon{width:clamp(32px,7vw,38px);height:clamp(32px,7vw,38px);border-radius:11px;display:grid;place-items:center;font-size:clamp(.9rem,2vw,1.05rem);color:#fff;flex:none}
+  .fgroup-head > div:nth-child(2){min-width:0;flex:1}
+  .fgroup-head h3{font-size:clamp(.85rem,.4vw + .75rem,1rem);font-weight:800;line-height:1.3}
+  .fgroup-head p{font-size:clamp(.62rem,.3vw + .55rem,.74rem);color:var(--muted)}
+  .fgroup-head .badge{margin-left:auto;font-size:clamp(.58rem,.3vw + .5rem,.68rem);font-weight:800;padding:4px clamp(8px,1.5vw,11px);border-radius:999px;background:#f1f5f9;color:#475569;white-space:nowrap}
+
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:clamp(8px,1.5vw,12px)}
+  .fitem{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:clamp(10px,2vw,13px) clamp(12px,2.2vw,15px);transition:.2s;min-width:0}
+  .fitem:hover{background:#fff;border-color:#c7d2fe;box-shadow:0 6px 18px -12px rgba(99,102,241,.5)}
+  .fitem .fname{font-size:clamp(.62rem,.3vw + .54rem,.75rem);font-weight:800;color:#475569;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:7px;line-height:1.3}
+  .fitem .fname::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--vec);flex:none}
+  .fitem .fmath{font-family:'Cambria Math',Georgia,serif;font-size:clamp(.74rem,.35vw + .66rem,.95rem);color:#1e293b;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px clamp(8px,1.5vw,12px);line-height:1.85;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;max-width:100%}
+  .fitem .fnote{font-size:clamp(.62rem,.3vw + .54rem,.75rem);color:#64748b;margin-top:7px;line-height:1.55;overflow-wrap:break-word}
+
+  .fgroup.vec .ficon{background:linear-gradient(135deg,#4f46e5,#7c3aed)}
+  .fgroup.lpp .ficon{background:linear-gradient(135deg,#d97706,#f59e0b)}
+  .fgroup.dif .ficon{background:linear-gradient(135deg,#059669,#10b981)}
+  .fgroup.app .ficon{background:linear-gradient(135deg,#db2777,#ec4899)}
+
+  footer{text-align:center;color:var(--muted);font-size:clamp(.66rem,.3vw + .58rem,.78rem);margin-top:clamp(26px,5vw,44px);line-height:1.7;padding:0 8px}
+  .totop{display:inline-block;margin-top:14px;font-size:.95em;color:#6366f1;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:8px;transition:.2s}
+  .totop:hover{background:#eef2ff}
+
+  /* ═══════ MOBILE TWEAKS ═══════ */
+  @media(max-width:640px){
+    header h1{line-height:1.2}
+    .donutwrap{flex-direction:column;gap:14px}
+    .legend{width:100%;min-width:0}
+    .legend b{margin-left:auto}
+    .bars{height:150px;gap:5px}
+    .bcol .v{font-size:.6rem}
+    .chaphead .cnt{width:100%;text-align:left;margin-left:0;padding-top:6px;border-top:1px solid rgba(255,255,255,.2)}
+    .chaphead .cnt b{display:inline-block;margin-left:4px}
+    details.q summary{font-size:.82rem}
+    .mtag{margin-left:0}
+    .sol-head{font-size:.64rem}
+  }
+
+  @media(max-width:420px){
+    .stats{grid-template-columns:1fr 1fr}
+    .stat .num{font-size:1.35rem}
+    .fgroup-head .badge{margin-left:0;width:100%;text-align:center;margin-top:6px}
+    .fgroup-head h3{font-size:.85rem}
+  }
+
+  @media(min-width:1280px){
+    .wrap{max-width:1240px}
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none !important;animation:none !important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══════ HEADER ═══════ -->
+  <header>
+    <h1>📊 Maharashtra Board · 12th Maths &amp; Statistics</h1>
+    <p>Responsive Question Bank · Step-by-Step Solutions · Master Formula Reference</p>
+    <div class="pillrow">
+      <span class="pill">➡️ Maths 1 · Ch 5 Vectors</span>
+      <span class="pill">📈 Maths 1 · Ch 7 LPP</span>
+      <span class="pill">∂ Maths 2 · Ch 1 Differentiation</span>
+      <span class="pill">📐 Maths 2 · Ch 2 Applications</span>
+    </div>
+  </header>
+
+  <!-- ═══════ STATS ═══════ -->
+  <div class="stats">
+    <div class="stat"><span class="bar" style="background:var(--vec)"></span><div class="num">77</div><div class="lbl">Total Questions</div></div>
+    <div class="stat"><span class="bar" style="background:var(--diff)"></span><div class="num">77</div><div class="lbl">Worked Solutions</div></div>
+    <div class="stat"><span class="bar" style="background:var(--app)"></span><div class="num">45+</div><div class="lbl">Formulas Listed</div></div>
+    <div class="stat"><span class="bar" style="background:var(--lpp)"></span><div class="num">5</div><div class="lbl">Years Covered</div></div>
+  </div>
+
+  <!-- ═══════ CHARTS ═══════ -->
+  <div class="grid">
+    <div class="card">
+      <h3>Chapter-wise Distribution</h3>
+      <div class="sub">Share of all 77 questions</div>
+      <div class="donutwrap">
+        <svg viewBox="0 0 180 180" aria-label="Donut chart of chapter distribution">
+          <g transform="translate(90,90) rotate(-90)">
+            <circle r="70" fill="none" stroke="#eef2f7" stroke-width="26"/>
+            <circle r="70" fill="none" stroke="var(--vec)" stroke-width="26" stroke-dasharray="228.5 211.3"/>
+            <circle r="70" fill="none" stroke="var(--lpp)" stroke-width="26" stroke-dasharray="34.3 405.5" stroke-dashoffset="-228.5"/>
+            <circle r="70" fill="none" stroke="var(--diff)" stroke-width="26" stroke-dasharray="85.7 354.1" stroke-dashoffset="-262.8"/>
+            <circle r="70" fill="none" stroke="var(--app)" stroke-width="26" stroke-dasharray="91.4 348.4" stroke-dashoffset="-348.5"/>
+          </g>
+          <text x="90" y="84" text-anchor="middle" font-size="27" font-weight="800" fill="#0f172a">77</text>
+          <text x="90" y="103" text-anchor="middle" font-size="10.5" font-weight="700" fill="#64748b" letter-spacing="1">QUESTIONS</text>
+        </svg>
+        <div class="legend">
+          <div><span class="dot" style="background:var(--vec)"></span>Vectors <b>40 <small>52%</small></b></div>
+          <div><span class="dot" style="background:var(--app)"></span>Applications <b>16 <small>21%</small></b></div>
+          <div><span class="dot" style="background:var(--diff)"></span>Differentiation <b>15 <small>19%</small></b></div>
+          <div><span class="dot" style="background:var(--lpp)"></span>LPP <b>6 <small>8%</small></b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Year-wise Question Count</h3>
+      <div class="sub">Stacked by chapter</div>
+      <div class="bars">
+        <div class="bcol"><div class="v">15</div><div class="bstack">
+          <div class="bseg" style="background:var(--vec);height:53.3%"></div>
+          <div class="bseg" style="background:var(--app);height:20%"></div>
+          <div class="bseg" style="background:var(--diff);height:20%"></div>
+          <div class="bseg" style="background:var(--lpp);height:6.7%"></div>
+        </div><div class="y">2022</div></div>
+        <div class="bcol"><div class="v">15</div><div class="bstack">
+          <div class="bseg" style="background:var(--vec);height:46.7%"></div>
+          <div class="bseg" style="background:var(--app);height:26.7%"></div>
+          <div class="bseg" style="background:var(--diff);height:13.3%"></div>
+          <div class="bseg" style="background:var(--lpp);height:13.3%"></div>
+        </div><div class="y">2023</div></div>
+        <div class="bcol"><div class="v">16</div><div class="bstack">
+          <div class="bseg" style="background:var(--vec);height:56.2%"></div>
+          <div class="bseg" style="background:var(--app);height:18.8%"></div>
+          <div class="bseg" style="background:var(--diff);height:18.8%"></div>
+          <div class="bseg" style="background:var(--lpp);height:6.2%"></div>
+        </div><div class="y">2024</div></div>
+        <div class="bcol"><div class="v">15</div><div class="bstack">
+          <div class="bseg" style="background:var(--vec);height:60%"></div>
+          <div class="bseg" style="background:var(--app);height:13.3%"></div>
+          <div class="bseg" style="background:var(--diff);height:20%"></div>
+          <div class="bseg" style="background:var(--lpp);height:6.7%"></div>
+        </div><div class="y">2025</div></div>
+        <div class="bcol"><div class="v">16</div><div class="bstack">
+          <div class="bseg" style="background:var(--vec);height:43.7%"></div>
+          <div class="bseg" style="background:var(--app);height:25%"></div>
+          <div class="bseg" style="background:var(--diff);height:25%"></div>
+          <div class="bseg" style="background:var(--lpp);height:6.3%"></div>
+        </div><div class="y">2026</div></div>
+      </div>
+      <div class="slegend">
+        <span><span class="dot" style="background:var(--vec)"></span>Vectors</span>
+        <span><span class="dot" style="background:var(--app)"></span>Applications</span>
+        <span><span class="dot" style="background:var(--diff)"></span>Differentiation</span>
+        <span><span class="dot" style="background:var(--lpp)"></span>LPP</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:clamp(14px,3vw,18px)">
+    <h3>Marks-weight Distribution</h3>
+    <div class="sub">How the 77 questions break down by mark value</div>
+    <div class="marksbar">
+      <div style="flex:15.6;background:#94a3b8">12 MCQ</div>
+      <div style="flex:3.9;background:#64748b">3</div>
+      <div style="flex:23.4;background:#0ea5e9">18 × 2M</div>
+      <div style="flex:35.1;background:#8b5cf6">27 × 3M</div>
+      <div style="flex:22;background:#f43f5e">17 × 4M</div>
+    </div>
+    <div class="slegend">
+      <span>⬜ 1-Mark (3)</span><span>🟦 2-Mark (18)</span>
+      <span>🟪 3-Mark (27) ← most frequent</span><span>🟥 4-Mark (17)</span><span>⚫ MCQ (12)</span>
+    </div>
+  </div>
+
+
+  <!-- ═══════ CHAPTER 5 — VECTORS ═══════ -->
+  <section class="chap">
+    <div class="chaphead" style="background:linear-gradient(110deg,#4f46e5,#7c3aed)">
+      <div class="ico">➡️</div>
+      <div><h2>Maths 1 · Chapter 5 — Vectors</h2><p>Dot &amp; cross products · Lines · Planes · Proofs</p></div>
+      <div class="cnt"><b>40</b>questions</div>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2026 · 7 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (iv)</span> Angle between line and plane <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find the angle between the line <b>r̄ = (î + 2ĵ + k̂) + λ(î + ĵ + k̂)</b> and the plane <b>r̄ · (2î − ĵ + k̂) = 8</b>.
+            <div class="opts"><span class="correct">(a) sin⁻¹(√2/3)</span><span>(b) sin⁻¹(√3/2)</span><span>(c) sin⁻¹(1/2)</span><span>(d) sin⁻¹(1/√2)</span></div>
+          </div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Direction of line: <b>b̄ = î + ĵ + k̂</b> → |b̄| = √3. Normal of plane: <b>n̄ = 2î − ĵ + k̂</b> → |n̄| = √6.</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">Use sin θ = |b̄·n̄| / (|b̄||n̄|):
+              <span class="fx">b̄ · n̄ = 2 − 1 + 1 = 2</span>
+              <span class="fx">sin θ = 2 / (√3·√6) = 2/√18 = √2/3</span>
+            </div></div>
+            <div class="ans">θ = sin⁻¹(√2/3) → Option <b>(a)</b></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.7</span> Find k from slopes condition <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find <b>k</b> if the sum of the slopes of the lines <b>x² + kxy − 3y² = 0</b> is twice their product.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">For ax² + 2hxy + by² = 0: m₁ + m₂ = −2h/b, m₁m₂ = a/b. Here a = 1, 2h = k, b = −3.</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">m₁ + m₂ = k/3, &nbsp; m₁m₂ = −1/3</span>
+              <span class="fx">k/3 = 2(−1/3) ⟹ k = −2</span>
+            </div></div>
+            <div class="ans">k = −2</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.8</span> Vector equation of line through two points <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find the vector equation of the line through <b>A(1, 2, 3)</b> and <b>B(2, 3, 4)</b>.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">ā = î + 2ĵ + 3k̂. Direction: <span class="fx">b̄ = B − A = î + ĵ + k̂</span></div></div>
+            <div class="ans">r̄ = (î + 2ĵ + 3k̂) + λ(î + ĵ + k̂)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.18</span> Mid-points of sides → AD + BE + CF = 0 <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">D, E, F are mid-points of sides BC, CA, AB of ΔABC. Prove <b>AD + BE + CF = 0</b>.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Let position vectors of A, B, C be ā, b̄, c̄. Mid-points:
+              <span class="fx">d̄ = (b̄+c̄)/2, ē = (c̄+ā)/2, f̄ = (ā+b̄)/2</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">AD = (b̄ + c̄ − 2ā)/2</span>
+              <span class="fx">BE = (c̄ + ā − 2b̄)/2</span>
+              <span class="fx">CF = (ā + b̄ − 2c̄)/2</span>
+            </div></div>
+            <div class="step"><span class="sn">3</span><div class="txt">Adding, every vector cancels:
+              <span class="fx">AD + BE + CF = 0̄/2 = 0̄</span>
+            </div></div>
+            <div class="ans proof">AD + BE + CF = 0̄ — hence proved.</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.19</span> Show two lines intersect <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Show the lines <b>r̄ = (î + ĵ − k̂) + λ(2î − 2ĵ + k̂)</b> and <b>r̄ = (4î − 3ĵ + 2k̂) + μ(î − 2ĵ + 2k̂)</b> intersect.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Equate components:
+              <span class="fx">1 + 2λ = 4 + μ … (i)</span>
+              <span class="fx">1 − 2λ = −3 − 2μ … (ii)</span>
+              <span class="fx">−1 + λ = 2 + 2μ … (iii)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">From (i): μ = 2λ − 3. In (ii):
+              <span class="fx">1 − 2λ = 3 − 4λ ⟹ λ = 1 ⟹ μ = −1</span>
+            </div></div>
+            <div class="step"><span class="sn">3</span><div class="txt">Verify (iii): LHS = 0, RHS = 0 ✓. Point: λ = 1 → (3, −1, 0).</div></div>
+            <div class="ans proof">Lines intersect at (3, −1, 0).</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.20</span> Cartesian equation of plane <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find the cartesian equation of the plane <b>r̄ = (î − ĵ) + λ(î + ĵ + k̂) + μ(î − 2ĵ + 3k̂)</b>.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Point (1, −1, 0). Direction vectors b̄ = î+ĵ+k̂, c̄ = î−2ĵ+3k̂.</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">Normal = b̄ × c̄:
+              <span class="fx">n̄ = 5î − 2ĵ − 3k̂</span>
+            </div></div>
+            <div class="step"><span class="sn">3</span><div class="txt">Plane through (1, −1, 0):
+              <span class="fx">5(x−1) − 2(y+1) − 3z = 0 ⟹ 5x − 2y − 3z = 7</span>
+            </div></div>
+            <div class="ans">5x − 2y − 3z = 7</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.29</span> Section formula — internal division proof <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove <b>r̄ = (m b̄ + n ā)/(m + n)</b> for internal division of AB in ratio m : n.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">AR : RB = m : n ⟹ n·AR = m·RB.</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">n(r̄ − ā) = m(b̄ − r̄)</span>
+              <span class="fx">n r̄ + m r̄ = m b̄ + n ā</span>
+            </div></div>
+            <div class="ans proof">r̄ = (m b̄ + n ā)/(m + n) — hence proved.</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2025 · 9 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (iii)</span> |a|=5, |b|=13, |a×b|=25 → |a·b| <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">If |ā|=5, |b̄|=13, |ā×b̄|=25, then |ā·b̄| = ?
+            <div class="opts"><span>(a) 30</span><span class="correct">(b) 60</span><span>(c) 40</span><span>(d) 45</span></div>
+          </div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Lagrange identity:
+              <span class="fx">|ā×b̄|² + (ā·b̄)² = |ā|²|b̄|²</span>
+              <span class="fx">625 + (ā·b̄)² = 4225 ⟹ (ā·b̄)² = 3600</span>
+            </div></div>
+            <div class="ans">|ā·b̄| = 60 → Option <b>(b)</b></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (iv)</span> Vector equation of line <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">Line through <b>4î − ĵ + 2k̂</b> parallel to <b>−2î − ĵ + k̂</b>.</div>
+          <div class="sol"><div class="sol-head">Step-by-step solution</div>
+            <div class="ans">r̄ = (4î − ĵ + 2k̂) + λ(−2î − ĵ + k̂)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.2 (ii)</span> Unit vector in opposite direction <span class="mtag">1 Mark</span></summary>
+        <div class="qbody">
+          <div class="qtext">Unit vector opposite to <b>ū = 8î + 3ĵ − k̂</b>.</div>
+          <div class="sol"><div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt"><span class="fx">|ū| = √(64 + 9 + 1) = √74</span></div></div>
+            <div class="ans">−(8î + 3ĵ − k̂)/√74</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.7</span> Angles 45° &amp; 60° with Y and Z → find X angle <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Line makes 45° and 60° with Y and Z axes. Find angle with X-axis.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">cos²α + cos²45° + cos²60° = 1</span>
+              <span class="fx">cos²α = 1 − 1/2 − 1/4 = 1/4 ⟹ cos α = ±1/2</span>
+            </div></div>
+            <div class="ans">α = 60° (positive X-direction)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.8</span> Vector equation of plane ⊥ to vector <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Plane through <b>2î + 3ĵ + 4k̂</b> perpendicular to <b>2î + ĵ − 2k̂</b>.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">ā·n̄ = 4 + 3 − 8 = −1</span>
+            </div></div>
+            <div class="ans">r̄ · (2î + ĵ − 2k̂) = −1</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.18</span> Direction ratios &amp; cosines; origin check <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Line through (6, −7, −1) and (2, −3, 1). Find DRs, DCs, and show line does not pass through origin.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">DRs = (−4, 4, 2) ≡ (−2, 2, 1)</span>
+              <span class="fx">|DR| = 3 ⟹ DCs = (−2/3, 2/3, 1/3)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">At origin: (−6)/(−2) = 3 but 7/2 = 3.5 ≠ 3.</div></div>
+            <div class="ans proof">DRs = (−2, 2, 1); DCs = (−2/3, 2/3, 1/3); values disagree at O → line misses origin.</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.19</span> Cartesian &amp; vector equations of line <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Line through A(1, 2, 3) with DRs 2, 3, 7.</div>
+          <div class="sol"><div class="sol-head">Step-by-step solution</div>
+            <div class="ans">Cartesian: (x−1)/2 = (y−2)/3 = (z−3)/7<br>Vector: r̄ = (î + 2ĵ + 3k̂) + λ(2î + 3ĵ + 7k̂)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.20</span> Plane through 3 points <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Plane through A(1, 1, 2), B(0, 2, 3), C(4, 5, 6).</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">AB = (−1, 1, 1), AC = (3, 4, 4)</span>
+              <span class="fx">n̄ = AB × AC = 0î + 7ĵ − 7k̂ ≡ ĵ − k̂</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">ā·n̄ = (1)(0)+(1)(1)+(2)(−1) = −1</span>
+            </div></div>
+            <div class="ans">r̄ · (ĵ − k̂) = −1</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.29</span> Coplanarity + find t₁, t₂ <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Show r̄ = t₁ā + t₂b̄ uniquely for coplanar r̄. For r̄ = 2î + 7ĵ + 9k̂, ā = î + 2ĵ, b̄ = ĵ + 3k̂, find t₁, t₂.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Since ā, b̄ non-collinear, they span the plane; representation is unique.</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">t₁(î + 2ĵ) + t₂(ĵ + 3k̂) = 2î + 7ĵ + 9k̂</span>
+              <span class="fx">t₁ = 2, 2t₁ + t₂ = 7, 3t₂ = 9</span>
+            </div></div>
+            <div class="ans">t₁ = 2, t₂ = 3</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2024 · 9 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (iii)</span> α = 60°, β = 45° → γ = ? <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">Direction angles: α = 60°, β = 45°. Find γ.
+            <div class="opts"><span>(a) 30° or 90°</span><span>(b) 45° or 60°</span><span>(c) 90° or 130°</span><span class="correct">(d) 60° or 120°</span></div>
+          </div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">cos²γ = 1 − 1/4 − 1/2 = 1/4 ⟹ cos γ = ±1/2</span>
+            </div></div>
+            <div class="ans">γ = 60° or 120° → Option <b>(d)</b></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (iv)</span> Perpendicular distance from origin <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">Distance of plane <b>r̄ · (3î + 4ĵ + 12k̂) = 78</b> from origin.
+            <div class="opts"><span>(a) 4</span><span>(b) 5</span><span class="correct">(c) 6</span><span>(d) 8</span></div>
+          </div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">|n̄| = √(9+16+144) = 13</span>
+              <span class="fx">d = 78/13 = 6</span>
+            </div></div>
+            <div class="ans">Distance = 6 → Option <b>(c)</b></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.2 (ii)</span> Collinear vectors → find p <span class="mtag">1 Mark</span></summary>
+        <div class="qbody">
+          <div class="qtext">If <b>2î − 3ĵ + 4k̂</b> and <b>p î + 6ĵ − 8k̂</b> are collinear, find p.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">p/2 = 6/(−3) = −2 ⟹ p = −4</span>
+            </div></div>
+            <div class="ans">p = −4</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.7</span> Ratio in which C divides BA <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">If <b>5ā − 3b̄ − 2c̄ = 0̄</b>, find ratio in which C divides BA.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">c̄ = (5ā − 3b̄)/2 ⟹ external division with m=5, n=3</span>
+            </div></div>
+            <div class="ans">C divides BA externally in ratio 5 : 3</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.8</span> Vector equation of line <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Line through <b>4î − ĵ + 2k̂</b> parallel to <b>−2î − ĵ + k̂</b>. <em>(repeat of 2025)</em></div>
+          <div class="sol"><div class="sol-head">Step-by-step solution</div>
+            <div class="ans">r̄ = (4î − ĵ + 2k̂) + λ(−2î − ĵ + k̂)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.18</span> Semicircle angle is 90° — proof <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove by vectors: angle subtended on a semicircle is a right angle.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">O centre, AB diameter, P on circle. OA = ā, OP = p̄, OB = −ā; |ā| = |p̄| = r.</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">PA = ā − p̄, PB = −ā − p̄</span>
+              <span class="fx">PA · PB = −r² + 0 + r² = 0</span>
+            </div></div>
+            <div class="ans proof">PA · PB = 0 ⟹ PA ⊥ PB ⟹ ∠APB = 90°. Proved.</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.19</span> Shortest distance between lines <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Lines <b>r̄ = (î − ĵ) + λ(î + 2ĵ − 3k̂)</b> and <b>r̄ = (î − ĵ − 2k̂) + μ(î + 4ĵ − 5k̂)</b>.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">ā₂ − ā₁ = (0, 0, −2)</span>
+              <span class="fx">b̄₁ × b̄₂ = 2î + 2ĵ + 2k̂, |…| = 2√3</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">d = |−4| / (2√3) = 2/√3</span>
+            </div></div>
+            <div class="ans">d = 2/√3 = 2√3/3 units</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.20</span> Angle between line and plane <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Line <b>r̄ = (î + 2ĵ + k̂) + λ(î + ĵ + k̂)</b> and plane <b>r̄ · (2î + ĵ + k̂) = 8</b>.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">b̄·n̄ = 4, |b̄|=√3, |n̄|=√6</span>
+              <span class="fx">sin θ = 4/(3√2) = 2√2/3</span>
+            </div></div>
+            <div class="ans">θ = sin⁻¹(2√2/3)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.29</span> Volume of parallelepiped <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Vertices A(3, 2, −1), B(−2, 2, −3), C(3, 5, −2), D(−2, 5, 4).</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">AB = (−5, 0, −2), AC = (0, 3, −1), AD = (−5, 3, 5)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">AC × AD = 18î + 5ĵ + 15k̂</span>
+              <span class="fx">V = |AB·(AC×AD)| = |−90 − 30| = 120</span>
+            </div></div>
+            <div class="ans">Volume = 120 cubic units</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2023 · 7 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.2 (ii)</span> Find c satisfying |c ū| = 3 <span class="mtag">1 Mark</span></summary>
+        <div class="qbody">
+          <div class="qtext">ū = î + 2ĵ + 3k̂. Find c if |c ū| = 3.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">|ū| = √14, |c|√14 = 3 ⟹ c = ±3/√14</span>
+            </div></div>
+            <div class="ans">c = ±3/√14</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.7</span> Ratio in which C divides AB <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">If <b>5ā + 3b̄ − 8c̄ = 0̄</b>, find ratio in which C divides AB.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">c̄ = (5ā + 3b̄)/8 ⟹ internal with m=3, n=5</span>
+            </div></div>
+            <div class="ans">C divides AB internally in ratio 3 : 5</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.18</span> DRs ⊥ to two lines <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">DRs (−2, 1, −1) and (−3, −4, 1). Find DRs perpendicular to both.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">b̄₁ × b̄₂ = −3î + 5ĵ + 11k̂</span>
+            </div></div>
+            <div class="ans">DRs: −3, 5, 11</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.19</span> Shortest distance <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">(x−1)/2 = (y−2)/3 = (z−3)/4 and (x−2)/3 = (y−4)/4 = (z−5)/5.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">b̄₁×b̄₂ = −î + 2ĵ − k̂, |…| = √6</span>
+              <span class="fx">(ā₂−ā₁) = (1, 2, 2)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">d = |−1+4−2|/√6 = 1/√6</span>
+            </div></div>
+            <div class="ans">d = 1/√6 units</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.20</span> Coplanar lines → plane equation <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Lines from 2023 Q.20 — find plane containing them.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">n̄ = b̄₁ × b̄₂ = −2î − 3ĵ − 2k̂ ≡ 2î + 3ĵ + 2k̂</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">2(x−1) + 3(y−1) + 2(z+1) = 0</span>
+            </div></div>
+            <div class="ans">2x + 3y + 2z = 3</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.29</span> Volume of tetrahedron — proof + compute <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove V = ⅙|[ā b̄ c̄]| and find for ā = î+2ĵ+3k̂, b̄ = −î+ĵ+2k̂, c̄ = 2î+ĵ+4k̂.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt"><b>Proof:</b> Tetrahedron = 1/6 of parallelepiped with same coterminous edges.</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">[ā b̄ c̄] = 1(4−2) − 2(−4−4) + 3(−1−2) = 2 + 16 − 9 = 9</span>
+              <span class="fx">V = 9/6 = 3/2</span>
+            </div></div>
+            <div class="ans">Volume = 3/2 cubic units</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.30</span> Perpendicular from P(3,2,1) to line <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Line <b>r̄ = (7î + 7ĵ + 6k̂) + λ(−2î + 2ĵ + 3k̂)</b>. Find perpendicular distance from P(3,2,1).</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">A = (7,7,6), b̄ = (−2,2,3), AP = (−4,−5,−5)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">AP × b̄ = −5î + 22ĵ − 18k̂, |…| = 7√17</span>
+              <span class="fx">|b̄| = √17, d = 7√17/√17 = 7</span>
+            </div></div>
+            <div class="ans">d = 7 units</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2022 · 8 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (iv)</span> Scalar triple product value <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">î·(ĵ×k̂) + ĵ·(k̂×î) + k̂·(î×ĵ) = ?</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Each term = 1 + 1 + 1 = 3.</div></div>
+            <div class="ans">Value = 3</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (iii)</span> Line through origin and (2,1,−3) <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">Line through (0,0,0) and (2,1,−3).</div>
+          <div class="sol"><div class="sol-head">Step-by-step solution</div>
+            <div class="ans">x/2 = y/1 = z/(−3)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.7</span> Cartesian plane equation <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Plane through A(1, 2, 3) with normal DRs 3, 2, 5.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">3(x−1) + 2(y−2) + 5(z−3) = 0 ⟹ 3x + 2y + 5z = 22</span>
+            </div></div>
+            <div class="ans">3x + 2y + 5z = 22</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.17</span> Distance between parallel lines <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">x/2 = y/(−1) = z/2 and (x−1)/2 = (y−1)/(−1) = (z−1)/2.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">AB × b̄ = 3î − 3k̂, |…| = 3√2; |b̄| = 3</span>
+              <span class="fx">d = 3√2/3 = √2</span>
+            </div></div>
+            <div class="ans">d = √2 units</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.18</span> Centroid → find p, q, r <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">A(5,1,p), B(1,q,p), C(1,−2,3); centroid G(r, −4/3, 1/3).</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">G = (7/3, (q−1)/3, (2p+3)/3)</span>
+              <span class="fx">r = 7/3, q = −3, p = −1</span>
+            </div></div>
+            <div class="ans">p = −1, q = −3, r = 7/3</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.19</span> Section formula proof <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext"><em>Same as 2026 Q.29</em></div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="ans proof">r̄ = (m b̄ + n ā)/(m + n) — proved.</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.20</span> Plane parallel to two vectors <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Through A(−1,2,−5), parallel to <b>4î−ĵ+3k̂</b> and <b>î+ĵ−k̂</b>.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">n̄ = −2î + 7ĵ + 5k̂</span>
+              <span class="fx">ā·n̄ = 2 + 14 − 25 = −9</span>
+            </div></div>
+            <div class="ans">r̄ · (2î − 7ĵ − 5k̂) = 9</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.29</span> Altitudes of a triangle concurrent <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove by vectors: altitudes of a triangle are concurrent.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Let P(p̄) be intersection of altitudes from A and B. Then:
+              <span class="fx">(p̄−ā)·(c̄−b̄) = 0</span>
+              <span class="fx">(p̄−b̄)·(ā−c̄) = 0</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">Adding:
+              <span class="fx">(p̄ − c̄)·(b̄ − ā) = 0 ⟹ CP ⊥ AB</span>
+            </div></div>
+            <div class="ans proof">Third altitude also passes through P ⟹ altitudes concurrent.</div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+
+  <!-- ═══════ CHAPTER 7 — LPP ═══════ -->
+  <section class="chap">
+    <div class="chaphead" style="background:linear-gradient(110deg,#d97706,#f59e0b)">
+      <div class="ico">📈</div>
+      <div><h2>Maths 1 · Chapter 7 — Linear Programming</h2><p>Graphical method · Maximize / Minimize · Corner points</p></div>
+      <div class="cnt"><b>6</b>questions</div>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2026</div>
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.30</span> Minimize z = 5x + 2y <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext"><b>Minimize z = 5x + 2y</b> subject to 5x + y ≥ 10, x + y ≥ 6, x ≥ 0, y ≥ 0.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Corners:
+              <span class="fx">(0, 10), (1, 5), (6, 0)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">z(0,10)=20, z(1,5)=15, z(6,0)=30</span>
+            </div></div>
+            <div class="ans">Minimum z = 15 at (1, 5)</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2025</div>
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.30</span> Maximize z = 3x + 5y <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext"><b>Maximize z = 3x + 5y</b> subject to x + 4y ≤ 24, 3x + y ≤ 21, x + y ≤ 9, x, y ≥ 0.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Corners: (0,0), (7,0), (0,6), (4,5), (6,3).</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">z(4,5) = 12 + 25 = 37 ← max</span>
+              <span class="fx">z(6,3) = 18 + 15 = 33</span>
+            </div></div>
+            <div class="ans">Maximum z = 37 at (4, 5)</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2024</div>
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.30</span> Maximize z = 10x + 25y <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext"><b>Maximize z = 10x + 25y</b> subject to 0 ≤ x ≤ 3, 0 ≤ y ≤ 3, x + y ≤ 5.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Corners: (0,0), (3,0), (0,3), (3,2), (2,3).</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">z(3,2) = 80, z(2,3) = 95 ← max</span>
+            </div></div>
+            <div class="ans">Maximum z = 95 at (2, 3)</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2023</div>
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.8</span> Corner points of feasible region <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">2x + 3y ≤ 6, x + y ≥ 2, x, y ≥ 0.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="ans">Corner points: (2, 0), (3, 0), (0, 2)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.30</span> Minimize z = 8x + 10y <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext"><b>Minimize z = 8x + 10y</b> subject to 2x + y ≥ 7, 2x + 3y ≥ 15, y ≥ 2, x ≥ 0.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">Corners: (0, 7), (1.5, 4), (4.5, 2)</span>
+              <span class="fx">z = 70, 52 ← min, 56</span>
+            </div></div>
+            <div class="ans">Minimum z = 52 at (1.5, 4)</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2022</div>
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.30</span> Minimize z = 8x + 10y (repeat) <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Same as 2023 Q.30.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="ans">Minimum z = 52 at (1.5, 4)</div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+
+  <!-- ═══════ CHAPTER 1 — DIFFERENTIATION ═══════ -->
+  <section class="chap">
+    <div class="chaphead" style="background:linear-gradient(110deg,#059669,#10b981)">
+      <div class="ico">∂</div>
+      <div><h2>Maths 2 · Chapter 1 — Differentiation</h2><p>Chain rule · Higher order · Implicit · Parametric</p></div>
+      <div class="cnt"><b>15</b>questions</div>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2026 · 4 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (v)</span> dy/dx at x = 1 for y = sec(tan⁻¹x) <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">If y = sec(tan⁻¹x), dy/dx at x = 1 = ?
+            <div class="opts"><span>(a) 1/2</span><span>(b) 1</span><span class="correct">(c) 1/√2</span><span>(d) √2</span></div>
+          </div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Let u = tan⁻¹x. Then y = sec u.
+              <span class="fx">dy/dx = sec u · tan u · 1/(1+x²)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">At x = 1: u = π/4, sec = √2, tan = 1.
+              <span class="fx">dy/dx = √2 × 1 × 1/2 = 1/√2</span>
+            </div></div>
+            <div class="ans">Option <b>(c)</b> 1/√2</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.9</span> √x + √y = √a → dy/dx <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find dy/dx if <b>√x + √y = √a</b>.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">1/(2√x) + 1/(2√y) · dy/dx = 0</span>
+              <span class="fx">dy/dx = −√y/√x</span>
+            </div></div>
+            <div class="ans">dy/dx = −√(y/x)</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.10</span> Second derivative <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">y = x³ + 7x² − 2x − 9. Find d²y/dx².</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">y′ = 3x² + 14x − 2 ⟹ y″ = 6x + 14</span>
+            </div></div>
+            <div class="ans">d²y/dx² = 6x + 14</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.21</span> Chain rule proof <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove dy/dx = (dy/du)(du/dx).</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">δy/δx = (δy/δu)·(δu/δx)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">Take limits δx → 0 (⟹ δu → 0):
+              <span class="fx">dy/dx = (dy/du)(du/dx)</span>
+            </div></div>
+            <div class="ans proof">Chain rule proved.</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2025 · 3 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (v)</span> Derivative of √(|f|²+|g|²) <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">f(1)=3, f′(1)=−1/3, g(1)=−4, g′(1)=−8/3. Find h′(1) for h = √(f²+g²).</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">h′ = (f f′ + g g′) / √(f² + g²)</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">
+              <span class="fx">ff′ = −1, gg′ = 32/3 ⟹ sum = 29/3</span>
+              <span class="fx">√(f²+g²) = 5 ⟹ h′(1) = 29/15</span>
+            </div></div>
+            <div class="ans">h′(1) = 29/15</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.21</span> nᵗʰ derivative of log x <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find nᵗʰ derivative of log x.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">y₁ = 1/x, y₂ = −1/x², y₃ = 2/x³, y₄ = −6/x⁴</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">Pattern: alternating sign, factorial, denominator xⁿ.</div></div>
+            <div class="ans">yₙ = (−1)ⁿ⁻¹(n−1)!/xⁿ</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.31</span> Parametric rule + xˣ w.r.t. x⁷ <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove dy/dx = (dy/dt)/(dx/dt). Find derivative of xˣ w.r.t. x⁷.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">Proof: chain rule; rearrange. ∎</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">Let u = xˣ: log u = x log x ⟹ u′ = xˣ(1 + log x). v = x⁷ ⟹ v′ = 7x⁶.</div></div>
+            <div class="ans">du/dv = xˣ(1 + log x) / (7x⁶)</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2024 · 3 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.9</span> y = (log x)ˣ → dy/dx <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find dy/dx if y = (log x)ˣ.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">log y = x log(log x)</span>
+              <span class="fx">y′/y = log(log x) + 1/log x</span>
+            </div></div>
+            <div class="ans">dy/dx = (log x)ˣ [log(log x) + 1/log x]</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.21</span> y = sin⁻¹x → prove identity <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove (1 − x²)y″ − xy′ = 0.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">y′ = 1/√(1−x²) ⟹ (1−x²)(y′)² = 1</div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">Differentiate: −2x(y′)² + 2(1−x²)y′y″ = 0 ⟹ (1−x²)y″ − xy′ = 0.</div></div>
+            <div class="ans proof">Proved.</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.31</span> Parametric + x = at², y = 2at <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove dy/dx = (dy/dt)/(dx/dt). Find for x = at², y = 2at.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">dx/dt = 2at, dy/dt = 2a ⟹ dy/dx = 1/t</span>
+            </div></div>
+            <div class="ans">dy/dx = 1/t</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2023 · 2 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.21</span> Infinite radical — tan x <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">y = √(tan x + √(tan x + …)). Show dy/dx = sec²x/(2y−1). Find at x=0.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">y² = tan x + y ⟹ 2y y′ = sec²x + y′</span>
+              <span class="fx">(2y − 1)y′ = sec²x</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">At x=0: y² = y ⟹ y = 1. sec²0 = 1 ⟹ y′ = 1.</div></div>
+            <div class="ans">y′ = 1 at x = 0</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.31</span> Parametric + x = sin t, y = cos t <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove parametric rule. Find dy/dx for x = sin t, y = cos t.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">dx/dt = cos t, dy/dt = −sin t ⟹ dy/dx = −tan t</span>
+            </div></div>
+            <div class="ans">dy/dx = −tan t</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2022 · 3 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (v)</span> (f⁻¹)′(−3) for f(x)=x⁵+2x−3 <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">f(x) = x⁵ + 2x − 3. Find (f⁻¹)′(−3).</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">a⁵ + 2a − 3 = −3 ⟹ a = 0</span>
+              <span class="fx">f′(0) = 2 ⟹ (f⁻¹)′(−3) = 1/2</span>
+            </div></div>
+            <div class="ans">(f⁻¹)′(−3) = 1/2</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.21</span> y = e^(m tan⁻¹x) identity <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Prove (1 + x²)y″ + (2x − m)y′ = 0.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">y′ = my/(1+x²) ⟹ (1+x²)y′ = my</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">Differentiate: 2x y′ + (1+x²)y″ = my′ ⟹ (1+x²)y″ + (2x−m)y′ = 0.</div></div>
+            <div class="ans proof">Proved.</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.31</span> Parametric + x = sin t, y = cos t <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Same as 2023 Q.31.</div>
+          <div class="sol"><div class="sol-head">Step-by-step solution</div>
+            <div class="ans">dy/dx = −tan t</div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+
+  <!-- ═══════ CHAPTER 2 — APPLICATIONS ═══════ -->
+  <section class="chap">
+    <div class="chaphead" style="background:linear-gradient(110deg,#db2777,#ec4899)">
+      <div class="ico">📐</div>
+      <div><h2>Maths 2 · Chapter 2 — Applications of Derivatives</h2><p>Tangent · Approximation · Maxima-Minima · LMVT</p></div>
+      <div class="cnt"><b>16</b>questions</div>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2026 · 4 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (vi)</span> Approximate x³−3x+5 at x=1.99 <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">Approximate value at x = 1.99.
+            <div class="opts"><span>(a) 6.09</span><span class="correct">(b) 6.91</span><span>(c) 7.09</span><span>(d) 7.91</span></div>
+          </div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">f(2)=7, f′(2)=9, δx = −0.01</span>
+              <span class="fx">f(1.99) ≈ 7 + 9(−0.01) = 6.91</span>
+            </div></div>
+            <div class="ans">≈ 6.91 → Option <b>(b)</b></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.11</span> Increasing/decreasing on ℝ <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">f(x) = x³ + 6x² + 12x − 7.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">f′(x) = 3(x+2)² ≥ 0 ⟹ increasing on ℝ</span>
+            </div></div>
+            <div class="ans proof">Strictly increasing on ℝ.</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.12</span> Circular wave area rate <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Radius increases at 3 cm/s. Find dA/dt at r = 8.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">A = πr² ⟹ dA/dt = 2πr·dr/dt = 2π(8)(3) = 48π</span>
+            </div></div>
+            <div class="ans">≈ 150.8 cm²/s</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.22</span> Verify LMVT for log x on [1, e] <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Verify LMVT for f(x) = log x on [1, e].</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">RHS = (1−0)/(e−1) = 1/(e−1)</span>
+              <span class="fx">f′(c) = 1/c = 1/(e−1) ⟹ c = e − 1 ≈ 1.718</span>
+            </div></div>
+            <div class="step"><span class="sn">2</span><div class="txt">1 < 1.718 < 2.718 ✓</div></div>
+            <div class="ans proof">LMVT verified; c = e − 1.</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2025 · 2 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.9</span> Min sum of squares of 20 <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Divide 20 for minimum sum of squares.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">S = x² + (20−x)²; S′ = 4x − 40 = 0 ⟹ x = 10</span>
+              <span class="fx">S″ = 4 > 0 ⟹ min</span>
+            </div></div>
+            <div class="ans">Parts: 10, 10; min S = 200</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.22</span> Velocity when a = 14 <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">s = 2t³ − 5t² + 4t − 3. Find v and s when a = 14.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">v = 6t² − 10t + 4, a = 12t − 10 = 14 ⟹ t = 2</span>
+              <span class="fx">v(2) = 8 ft/s, s(2) = 1 ft</span>
+            </div></div>
+            <div class="ans">v = 8 ft/s, s = 1 ft</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2024 · 3 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.1 (v)</span> Slope of tangent x = sin θ, y = cos 2θ at θ = π/6 <span class="mtag">MCQ</span></summary>
+        <div class="qbody">
+          <div class="qtext">Slope at θ = π/6?</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">dy/dx = (−2 sin 2θ)/cos θ = (−2·√3/2)/(√3/2) = −2</span>
+            </div></div>
+            <div class="ans">Slope = −2</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.22</span> Approximate tan⁻¹(1.002) <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find approximate value.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">f(1) = 0.7854, f′(1) = 1/2, δx = 0.002</span>
+              <span class="fx">f(1.002) ≈ 0.7854 + 0.001 = 0.7864</span>
+            </div></div>
+            <div class="ans">≈ 0.7864</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.32</span> Open-top box max volume <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">SA = 147 cm². Square base. Find max volume.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">x² + 4xh = 147 ⟹ V = (147x − x³)/4</span>
+              <span class="fx">V′ = 0 ⟹ x = 7, h = 3.5</span>
+            </div></div>
+            <div class="ans">7 × 7 × 3.5 cm; V = 171.5 cm³</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2023 · 4 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.9</span> Strictly increasing on ℝ <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">f(x) = x³ + 10x + 7.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">f′(x) = 3x² + 10 ≥ 10 > 0 ⟹ strictly increasing</span>
+            </div></div>
+            <div class="ans proof">Strictly increasing on ℝ.</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.22</span> Approximate sin(30°30′) <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Given 1° = 0.0175 rad, cos 30° = 0.866.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">δx = 0.5 × 0.0175 = 0.00875</span>
+              <span class="fx">sin(30°30′) ≈ 0.5 + 0.866(0.00875) = 0.5076</span>
+            </div></div>
+            <div class="ans">≈ 0.5076</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.24</span> Wire 36 m → rectangle max area <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Find dimensions for max area.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">A = x(18−x) = 18x − x²; A′ = 0 ⟹ x = 9</span>
+            </div></div>
+            <div class="ans">9 m × 9 m; max area = 81 m²</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.32</span> Verify LMVT for √(x+4) on [0, 5] <span class="mtag">4 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Verify LMVT.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">RHS = 1/5</span>
+              <span class="fx">1/(2√(c+4)) = 1/5 ⟹ c = 9/4 = 2.25 ∈ (0, 5)</span>
+            </div></div>
+            <div class="ans proof">c = 9/4 ✓</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="yearblock">
+      <div class="yeartag">2022 · 3 questions</div>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.9</span> Tangent at (½, 2) <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">y = 2x³ − x² + 2. Find tangent at (1/2, 2).</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">m = 6(1/4) − 1 = 1/2</span>
+              <span class="fx">y − 2 = (1/2)(x − 1/2) ⟹ 2x − 4y + 7 = 0</span>
+            </div></div>
+            <div class="ans">2x − 4y + 7 = 0</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.12</span> tan x increasing on (0, π/2) <span class="mtag">2 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Show increasing.</div>
+          <div class="sol">
+            <div class="sol-head">Step-by-step solution</div>
+            <div class="step"><span class="sn">1</span><div class="txt">
+              <span class="fx">f′(x) = sec²x > 0 on (0, π/2)</span>
+            </div></div>
+            <div class="ans proof">Increasing on (0, π/2).</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="q"><summary><span class="chev">▶</span><span class="qno">Q.24</span> Wire 36 m → max area (repeat) <span class="mtag">3 Marks</span></summary>
+        <div class="qbody">
+          <div class="qtext">Same as 2023 Q.24.</div>
+          <div class="sol"><div class="sol-head">Step-by-step solution</div>
+            <div class="ans">9 × 9 m; max area = 81 m²</div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+
+  <!-- ═══════ FORMULA BANK ═══════ -->
+  <div class="formula-hero">
+    <h2>📐 Master Formula Bank</h2>
+    <p>Every key formula across all four chapters · quick reference for revision</p>
+  </div>
+
+  <!-- VECTORS -->
+  <div class="fgroup vec">
+    <div class="fgroup-head">
+      <div class="ficon">➡️</div>
+      <div><h3>Chapter 5 · Vectors</h3><p>Algebra, geometry, products, lines &amp; planes</p></div>
+      <div class="badge">24 formulas</div>
+    </div>
+    <div class="fgrid">
+      <div class="fitem"><div class="fname">Magnitude</div><div class="fmath">|ā| = √(a₁² + a₂² + a₃²)</div><div class="fnote">Length of ā = a₁î + a₂ĵ + a₃k̂</div></div>
+      <div class="fitem"><div class="fname">Unit vector</div><div class="fmath">â = ā / |ā|, &nbsp; |â| = 1</div><div class="fnote">Opposite: −â = −ā/|ā|</div></div>
+      <div class="fitem"><div class="fname">Dot product</div><div class="fmath">ā · b̄ = a₁b₁ + a₂b₂ + a₃b₃</div><div class="fnote">Scalar; ā·b̄ = |ā||b̄|cos θ</div></div>
+      <div class="fitem"><div class="fname">Angle between vectors</div><div class="fmath">cos θ = (ā·b̄)/(|ā||b̄|)</div></div>
+      <div class="fitem"><div class="fname">Perpendicular condition</div><div class="fmath">ā ⊥ b̄ ⟺ ā · b̄ = 0</div></div>
+      <div class="fitem"><div class="fname">Cross product</div><div class="fmath">ā × b̄ = | î ĵ k̂ ; a₁ a₂ a₃ ; b₁ b₂ b₃ |</div><div class="fnote">Vector ⊥ to both ā and b̄</div></div>
+      <div class="fitem"><div class="fname">Lagrange's Identity</div><div class="fmath">|ā×b̄|² + (ā·b̄)² = |ā|²|b̄|²</div><div class="fnote">Key identity for MCQ problems</div></div>
+      <div class="fitem"><div class="fname">Collinear vectors</div><div class="fmath">a₁/b₁ = a₂/b₂ = a₃/b₃</div></div>
+      <div class="fitem"><div class="fname">Direction cosines identity</div><div class="fmath">cos²α + cos²β + cos²γ = 1</div></div>
+      <div class="fitem"><div class="fname">Line: vector form</div><div class="fmath">r̄ = ā + λb̄</div><div class="fnote">ā = point, b̄ = direction</div></div>
+      <div class="fitem"><div class="fname">Line: cartesian form</div><div class="fmath">(x − x₁)/a = (y − y₁)/b = (z − z₁)/c</div></div>
+      <div class="fitem"><div class="fname">Angle between two lines</div><div class="fmath">cos θ = |b̄₁ · b̄₂| / (|b̄₁||b̄₂|)</div></div>
+      <div class="fitem"><div class="fname">Angle: line &amp; plane</div><div class="fmath">sin θ = |b̄ · n̄| / (|b̄||n̄|)</div></div>
+      <div class="fitem"><div class="fname">Plane: vector form</div><div class="fmath">r̄ · n̄ = d</div></div>
+      <div class="fitem"><div class="fname">Plane: cartesian form</div><div class="fmath">ax + by + cz = d</div><div class="fnote">(a, b, c) = normal DRs</div></div>
+      <div class="fitem"><div class="fname">Distance from origin to plane</div><div class="fmath">d = |d₀| / |n̄|</div></div>
+      <div class="fitem"><div class="fname">Shortest distance between skew lines</div><div class="fmath">d = |(ā₂−ā₁)·(b̄₁×b̄₂)| / |b̄₁×b̄₂|</div></div>
+      <div class="fitem"><div class="fname">Section formula (internal)</div><div class="fmath">r̄ = (m b̄ + n ā)/(m + n)</div></div>
+      <div class="fitem"><div class="fname">Section formula (external)</div><div class="fmath">r̄ = (m b̄ − n ā)/(m − n)</div></div>
+      <div class="fitem"><div class="fname">Scalar triple product</div><div class="fmath">[ā b̄ c̄] = ā · (b̄ × c̄)</div><div class="fnote">Volume of parallelepiped = |[ā b̄ c̄]|</div></div>
+      <div class="fitem"><div class="fname">Volume of tetrahedron</div><div class="fmath">V = (1/6)|[ā b̄ c̄]|</div></div>
+      <div class="fitem"><div class="fname">Perpendicular distance (point to line)</div><div class="fmath">d = |AP × b̄| / |b̄|</div></div>
+      <div class="fitem"><div class="fname">Distance between parallel lines</div><div class="fmath">d = |AB × b̄| / |b̄|</div></div>
+      <div class="fitem"><div class="fname">Centroid of triangle</div><div class="fmath">G = (ā + b̄ + c̄) / 3</div></div>
+    </div>
+  </div>
+
+  <!-- LPP -->
+  <div class="fgroup lpp">
+    <div class="fgroup-head">
+      <div class="ficon">📈</div>
+      <div><h3>Chapter 7 · Linear Programming</h3><p>Graphical method &amp; corner point evaluation</p></div>
+      <div class="badge">5 formulas</div>
+    </div>
+    <div class="fgrid">
+      <div class="fitem"><div class="fname">Objective function</div><div class="fmath">z = ax + by</div><div class="fnote">Maximize or minimize over feasible region</div></div>
+      <div class="fitem"><div class="fname">Feasible region</div><div class="fmath">Intersection of all constraint half-planes</div><div class="fnote">Common region satisfying every inequality + x, y ≥ 0</div></div>
+      <div class="fitem"><div class="fname">Corner point theorem</div><div class="fmath">Optimum z occurs at a corner point</div><div class="fnote">For a bounded feasible region, evaluate z at all vertices</div></div>
+      <div class="fitem"><div class="fname">Boundary intersection</div><div class="fmath">Solve the two boundary equations simultaneously</div></div>
+      <div class="fitem"><div class="fname">Bounded vs unbounded</div><div class="fmath">Bounded → max/min exist &nbsp;·&nbsp; Unbounded → may or may not exist</div></div>
+    </div>
+  </div>
+
+  <!-- DIFFERENTIATION -->
+  <div class="fgroup dif">
+    <div class="fgroup-head">
+      <div class="ficon">∂</div>
+      <div><h3>Chapter 1 · Differentiation</h3><p>Rules, standard derivatives, higher order</p></div>
+      <div class="badge">17 formulas</div>
+    </div>
+    <div class="fgrid">
+      <div class="fitem"><div class="fname">Power rule</div><div class="fmath">d/dx (xⁿ) = n xⁿ⁻¹</div></div>
+      <div class="fitem"><div class="fname">Product rule</div><div class="fmath">(uv)′ = u′v + uv′</div></div>
+      <div class="fitem"><div class="fname">Quotient rule</div><div class="fmath">(u/v)′ = (u′v − uv′)/v²</div></div>
+      <div class="fitem"><div class="fname">Chain rule</div><div class="fmath">dy/dx = (dy/du)·(du/dx)</div></div>
+      <div class="fitem"><div class="fname">Parametric rule</div><div class="fmath">dy/dx = (dy/dt)/(dx/dt), &nbsp; dx/dt ≠ 0</div></div>
+      <div class="fitem"><div class="fname">Implicit differentiation</div><div class="fmath">Differentiate both sides w.r.t. x, solve for dy/dx</div></div>
+      <div class="fitem"><div class="fname">Logarithmic differentiation</div><div class="fmath">y = f(x)^g(x) → log y = g(x) log f(x)</div></div>
+      <div class="fitem"><div class="fname">Inverse function derivative</div><div class="fmath">(f⁻¹)′(b) = 1 / f′(a), &nbsp; f(a) = b</div></div>
+      <div class="fitem"><div class="fname">sin⁻¹x derivative</div><div class="fmath">d/dx (sin⁻¹x) = 1/√(1 − x²)</div></div>
+      <div class="fitem"><div class="fname">cos⁻¹x derivative</div><div class="fmath">d/dx (cos⁻¹x) = −1/√(1 − x²)</div></div>
+      <div class="fitem"><div class="fname">tan⁻¹x derivative</div><div class="fmath">d/dx (tan⁻¹x) = 1/(1 + x²)</div></div>
+      <div class="fitem"><div class="fname">log x derivative</div><div class="fmath">d/dx (log x) = 1/x</div></div>
+      <div class="fitem"><div class="fname">eˣ derivative</div><div class="fmath">d/dx (eˣ) = eˣ</div></div>
+      <div class="fitem"><div class="fname">aˣ derivative</div><div class="fmath">d/dx (aˣ) = aˣ · log a</div></div>
+      <div class="fitem"><div class="fname">nᵗʰ derivative of log x</div><div class="fmath">yₙ = (−1)ⁿ⁻¹(n−1)!/xⁿ</div></div>
+      <div class="fitem"><div class="fname">sin⁻¹x identity</div><div class="fmath">(1 − x²)y″ − xy′ = 0</div></div>
+      <div class="fitem"><div class="fname">e^(m tan⁻¹x) identity</div><div class="fmath">(1 + x²)y″ + (2x − m)y′ = 0</div></div>
+    </div>
+  </div>
+
+  <!-- APPLICATIONS -->
+  <div class="fgroup app">
+    <div class="fgroup-head">
+      <div class="ficon">📐</div>
+      <div><h3>Chapter 2 · Applications of Derivatives</h3><p>Tangent, approximation, maxima-minima, LMVT, rates</p></div>
+      <div class="badge">15 formulas</div>
+    </div>
+    <div class="fgrid">
+      <div class="fitem"><div class="fname">Slope of tangent</div><div class="fmath">m = dy/dx at (x₁, y₁)</div></div>
+      <div class="fitem"><div class="fname">Tangent equation</div><div class="fmath">y − y₁ = m(x − x₁)</div></div>
+      <div class="fitem"><div class="fname">Normal equation</div><div class="fmath">y − y₁ = −(1/m)(x − x₁)</div></div>
+      <div class="fitem"><div class="fname">Parametric slope</div><div class="fmath">dy/dx = (dy/dθ)/(dx/dθ)</div></div>
+      <div class="fitem"><div class="fname">Linear approximation</div><div class="fmath">f(x + δx) ≈ f(x) + f′(x)·δx</div><div class="fnote">Used for approximate values</div></div>
+      <div class="fitem"><div class="fname">Increasing function</div><div class="fmath">f′(x) > 0 on interval</div></div>
+      <div class="fitem"><div class="fname">Decreasing function</div><div class="fmath">f′(x) < 0 on interval</div></div>
+      <div class="fitem"><div class="fname">First derivative test</div><div class="fmath">f′(c) = 0 ⟹ critical point</div></div>
+      <div class="fitem"><div class="fname">Second derivative test</div><div class="fmath">f″(c) &lt; 0 ⟹ max · f″(c) &gt; 0 ⟹ min</div></div>
+      <div class="fitem"><div class="fname">Lagrange's MVT</div><div class="fmath">f′(c) = [f(b) − f(a)] / (b − a), c ∈ (a, b)</div></div>
+      <div class="fitem"><div class="fname">Rate of change</div><div class="fmath">dy/dt = (dy/dx)(dx/dt)</div></div>
+      <div class="fitem"><div class="fname">Circle area rate</div><div class="fmath">dA/dt = 2πr · dr/dt</div></div>
+      <div class="fitem"><div class="fname">Rectangle optimization</div><div class="fmath">Fixed perimeter P: max area at x = y = P/4</div></div>
+      <div class="fitem"><div class="fname">Open-top box (square base)</div><div class="fmath">SA = x² + 4xh = S ⟹ V = (Sx − x³)/4</div></div>
+      <div class="fitem"><div class="fname">Sum-of-squares min</div><div class="fmath">S = x² + (a − x)² ⟹ min at x = a/2</div></div>
+    </div>
+  </div>
+
+  <footer>
+    📚 Maharashtra State Board 12th Mathematics &amp; Statistics · 2022 – 2026<br>
+    77 questions · all with step-by-step solutions · 45+ formulas in reference bank<br>
+    Maths 1 (Ch 5 Vectors, Ch 7 LPP) + Maths 2 (Ch 1 Differentiation, Ch 2 Applications)<br>
+    <a href="#" class="totop">↑ Back to top</a>
+  </footer>
+
+</div>
+</body>
+</html>
